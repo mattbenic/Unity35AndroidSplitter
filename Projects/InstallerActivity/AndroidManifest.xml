@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yourdomain.yourapp"
+	android:installLocation="preferExternal"
+    android:versionCode="1"
+    android:versionName="1.0">
+    
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true"/>
+	
+    <!-- Only devices >= 3 have a version of Android Market that supports licensing. 14 is needed for newer notification features. -->
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15" />
+
+	<!-- PERMISSIONS -->
+    <!-- Required to access Android Market Licensing -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+    <!-- Required to download files from Android Market -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Required to keep CPU alive while downloading files (NOT to keep screen awake) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Required to poll the state of the network connection and respond to changes -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Required to check whether Wi-Fi is enabled -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- Required to read and write the expansion files on shared storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Required for IAP -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <!-- Accounts needed by Tegra to make non-identifying hash from google account name. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+   
+    <application
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/icon"
+		android:label="@string/installer_app_name"        
+		>
+        
+		<!-- ACTIVITIES -->
+        <activity
+            android:name="com.yourdomain.yourapp.BsEp1DownloaderActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="landscape">
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.flk.unityLauncher.CustomUnityPlayerProxyActivity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboard|keyboardHidden|orientation">
+        </activity>
+
+        <activity android:name="com.flk.unityLauncher.UnityLauncherActivity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboard|keyboardHidden|orientation">
+        </activity>
+        
+        <activity android:name="com.flk.unityLauncher.UnityLauncherNativeActivity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboard|keyboardHidden|orientation">
+            <meta-data android:name="android.app.lib_name" android:value="unity" />
+        </activity>
+
+       	<activity android:name="com.unity3d.player.VideoPlayer"
+                 	android:screenOrientation="behind"
+                 	android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen">
+       	</activity>
+		
+  		<activity android:name="com.prime31.GoogleIABProxyActivity"></activity>
+
+        <!--
+         In order to start the service, it must be uniquely registered with
+         the package manager here. 
+        -->
+        <service android:name="com.flk.unityLauncher.UnityDownloaderService" />
+
+        <!--
+         In order for the alarm manager to contact the downloader script, the receiver
+         must be uniquely registered with the package manager here. 
+        -->
+        <receiver android:name="com.yourdomain.yourapp.YourAppAlarmReceiver" />
+
+        <!-- META-DATA -->
+
+    </application>
+
+</manifest>

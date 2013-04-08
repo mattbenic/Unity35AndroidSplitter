@@ -1,0 +1,6 @@
+# System files
+[T]humbs.db
+.DS_Store
+
+# Bin files will be regenerated automatically
+Projects/InstallerActivity/bin/
