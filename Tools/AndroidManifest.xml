@@ -42,7 +42,7 @@
         
 		<!-- ACTIVITIES -->
         <activity
-            android:name="com.yourdomain.yourapp.BsEp1DownloaderActivity"
+            android:name="com.yourdomain.yourapp.YourAppDownloaderActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="landscape">
             <intent-filter >

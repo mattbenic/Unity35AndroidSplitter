@@ -95,6 +95,14 @@ public class BuilderUtils {
 					return;
 				}
 				unityProjectPath = args[i];
+			}	else if (arg.toLowerCase().equals("-a")) {
+				// Android sdk root
+				if (++i >= args.length) {
+					printUsage();
+					System.out.println("Missing Android SDK Root");
+					return;
+				}
+				androidSdkRoot = args[i];
 			} else if (arg.toLowerCase().equals("-s")) {
 				// Signing
 				if (i+4 >= args.length) {
@@ -159,7 +167,11 @@ public class BuilderUtils {
 
 		// Set up android tools
 		if (androidSdkRoot.equals(""))
+		{
+			System.err.println("\nAuto locate Unity Android SDK..");
 			androidSdkRoot = getUnityAndroidSDKRootSetting();
+
+		}
 		if (androidSdkRoot.trim().length() == 0) {
 			System.err
 					.println("\nUnity Android SDK Root Path hasn't been set! The build process can't continue!!!\nQuit, setup Unity Android Sdk root path, make sure you have the latest Android API installed and try building again.");
